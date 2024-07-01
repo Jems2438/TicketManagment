@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Admin Pages</h2>
+<div class="col-md-6">
+    <h4>User Manager</h4>
+    <div class="list-group">
+        @Html.ActionLink("UserList", "Index", "Admin", null, new { @class = "list-group-item" })
+      
+
+    </div>
+</div>
+<div class="col-md-6">
+    <button>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </button>
+    <h4> Manager</h4>
+    <div class="list-group">
+    </div>
+</div>
+

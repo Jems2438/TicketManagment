@@ -19,14 +19,18 @@ namespace Ticketmanagment.WebUI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        
+        private IRepository<Users> userContext;
+
 
         //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         //{
         //    UserManager = userManager;
         //    SignInManager = signInManager;
         //}
-
+        public AccountController(IRepository<Users> UserContext)
+        {
+            this.userContext = UserContext;
+        }
         public ApplicationSignInManager SignInManager
         {
             get
@@ -154,7 +158,18 @@ namespace Ticketmanagment.WebUI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    
+
+                    Users users = new Users()
+                    {
+                        UserName = model.UserName,
+                        Email = model.Email,
+                        Role = model.Role,
+                        Password = model.Password
+                        
+                        
+                    };
+                    userContext.Insert(users);
+                    userContext.Commit();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

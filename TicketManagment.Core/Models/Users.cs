@@ -17,7 +17,7 @@ namespace TicketManagment.Core.Models
         public string Role { get; set; }
 
         [Required]
-        [StringLength(15, MinimumLength = 6)]
+        
         public string Password { get; set; }
 
     }
