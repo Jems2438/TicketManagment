@@ -54,6 +54,7 @@ namespace Ticketmanagment.WebUI
             container.RegisterType<IRepository<Comment>, SQLRepository<Comment>>();
 
             
+            container.RegisterType<IUserService, UserServices>();
 
 
         }

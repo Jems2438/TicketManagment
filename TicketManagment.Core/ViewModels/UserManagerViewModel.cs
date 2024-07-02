@@ -7,9 +7,10 @@ using TicketManagment.Core.Models;
 
 namespace TicketManagment.Core.ViewModels
 {
-    public class UserManagerViewModel
+    public class UserManagerViewModel 
     {
-        public Users Users { get; set; }
+        public IEnumerable<Users> Users { get; set; }
+
 
     }
 }

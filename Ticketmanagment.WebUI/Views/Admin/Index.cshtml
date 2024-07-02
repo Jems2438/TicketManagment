@@ -7,15 +7,15 @@
 <div class="col-md-6">
     <h4>User Manager</h4>
     <div class="list-group">
-        @Html.ActionLink("UserList", "Index", "Admin", null, new { @class = "list-group-item" })
-      
+        @Html.ActionLink("Users", "UserList", "UserLists", null, new { @class = "list-group-item" })
+      @Html.ActionLink("Register", "Register", "Account", null, new { @class = "list-group-item" })
 
     </div>
 </div>
 <div class="col-md-6">
-    <button>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </button>
-    <h4> Manager</h4>
-    <div class="list-group">
-    </div>
+</div>
+
+<div class="col-md-7">
+    <h4>Ticket Manager</h4>    
 </div>
 
