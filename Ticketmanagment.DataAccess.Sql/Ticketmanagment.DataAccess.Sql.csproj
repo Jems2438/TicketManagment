@@ -60,6 +60,14 @@
     <Compile Include="Migrations\202407010714503_newMigration.Designer.cs">
       <DependentUpon>202407010714503_newMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202407030604350_rolechange.cs" />
+    <Compile Include="Migrations\202407030604350_rolechange.Designer.cs">
+      <DependentUpon>202407030604350_rolechange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202407030705107_BaseEntitychange.cs" />
+    <Compile Include="Migrations\202407030705107_BaseEntitychange.Designer.cs">
+      <DependentUpon>202407030705107_BaseEntitychange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -84,6 +92,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202407010714503_newMigration.resx">
       <DependentUpon>202407010714503_newMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407030604350_rolechange.resx">
+      <DependentUpon>202407030604350_rolechange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407030705107_BaseEntitychange.resx">
+      <DependentUpon>202407030705107_BaseEntitychange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

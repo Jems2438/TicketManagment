@@ -10,6 +10,8 @@ namespace TicketManagment.Core.Models
     {
         public string Id { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset UpdatedAt { get; set; }
+        public string UpdatedId { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
