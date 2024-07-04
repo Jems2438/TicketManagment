@@ -21,7 +21,7 @@ namespace Ticketmanagment.WebUI.Controllers
         // GET: UserList
         public ActionResult UserList()
         {
-            List<Users> model = context.Collection().ToList();
+            var model = userService.GetUserList();
             return View(model);
         }
 
@@ -48,7 +48,6 @@ namespace Ticketmanagment.WebUI.Controllers
             if (usersToEdit == null)
             {
                 return HttpNotFound();
-
             }
             else
             {
@@ -56,18 +55,10 @@ namespace Ticketmanagment.WebUI.Controllers
                 {
                     return View(users);
                 }
-
-                usersToEdit.Role = users.Role;
-                usersToEdit.IsActive = users.IsActive;
-                usersToEdit.UserName = users.UserName;
-                usersToEdit.Email = users.Email;
-               
-                context.Commit();
-
+                userService.EditUser(users, User.Identity.Name, Id);
                 return RedirectToAction("UserList");
             }
         }
-
 
         public ActionResult Delete(string Id)
         {
@@ -96,11 +87,7 @@ namespace Ticketmanagment.WebUI.Controllers
                 context.Delete(Id);
                 context.Commit();
                 return RedirectToAction("UserList");
-
             }
-
         }
-        
-
     }
 }

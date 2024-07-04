@@ -10,7 +10,9 @@ namespace TicketManagment.Core.Contracts
 {
     public interface IRoleService  
     {
-        List<RoleCreateViewModel> GetRolesList();
-        void CreateRole(Roles role,string Id);
+        List<RoleListViewModel> GetRolesList();
+        void CreateRole(Roles role,string emailId);
+        void EditRole(Roles role, string Id,string roleToEdit);
+        void FinalDelete(string Id);
     }
 }

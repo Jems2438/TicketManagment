@@ -68,6 +68,14 @@
     <Compile Include="Migrations\202407030705107_BaseEntitychange.Designer.cs">
       <DependentUpon>202407030705107_BaseEntitychange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202407040919389_newCreatedByField.cs" />
+    <Compile Include="Migrations\202407040919389_newCreatedByField.Designer.cs">
+      <DependentUpon>202407040919389_newCreatedByField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202407040926115_newupdatedfield.cs" />
+    <Compile Include="Migrations\202407040926115_newupdatedfield.Designer.cs">
+      <DependentUpon>202407040926115_newupdatedfield.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -98,6 +106,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202407030705107_BaseEntitychange.resx">
       <DependentUpon>202407030705107_BaseEntitychange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407040919389_newCreatedByField.resx">
+      <DependentUpon>202407040919389_newCreatedByField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407040926115_newupdatedfield.resx">
+      <DependentUpon>202407040926115_newupdatedfield.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

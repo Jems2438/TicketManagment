@@ -17,16 +17,15 @@ namespace Ticketmanagment.WebUI.Controllers
         public RolesController(IRepository<Roles> Context, IRoleService RoleService)
         {
             this.context = Context;
-            this.roleService = RoleService;
+            this.roleService = RoleService;          
+        }
+    
+        public ActionResult Index()
+        { 
+            var result = roleService.GetRolesList();
+            return View(result);
         }
 
-        // GET: Roles
-        public ActionResult Index()
-        {
-            List<RoleCreateViewModel> model = roleService.GetRolesList();
-            return View(model);
-        }
-          
         public ActionResult CreateRole()
         {
             Roles roles = new Roles();
@@ -42,8 +41,7 @@ namespace Ticketmanagment.WebUI.Controllers
             }
             else
             {
-                context.Insert(roles);
-                context.Commit();
+                roleService.CreateRole(roles, User.Identity.Name);
                 return RedirectToAction("Index");
             }
         }
@@ -78,11 +76,7 @@ namespace Ticketmanagment.WebUI.Controllers
                 {
                     return View(roles);
                 }
-
-                rolesToEdit.Name = roles.Name;
-                rolesToEdit.Code = roles.Code;
-                context.Commit();
-
+                roleService.EditRole(roles, User.Identity.Name, Id);
                 return RedirectToAction("Index");
             }
         }
@@ -111,10 +105,8 @@ namespace Ticketmanagment.WebUI.Controllers
             }
             else
             {
-                context.Delete(Id);
-                context.Commit();
+                roleService.FinalDelete(Id);
                 return RedirectToAction("Index");
-
             }
 
         }

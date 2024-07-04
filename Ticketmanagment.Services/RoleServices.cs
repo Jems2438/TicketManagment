@@ -7,34 +7,76 @@ using TicketManagment.Core.Contracts;
 using TicketManagment.Core.Models;
 using TicketManagment.Core.ViewModels;
 
+
+
+
 namespace Ticketmanagment.Services
 {
     public class RoleServices : IRoleService
     {
         IRepository<Roles> rolesContext;
         IRepository<Users> userContext;
-        public RoleServices(IRepository<Roles> RolesContext)
+
+        public RoleServices(IRepository<Roles> RolesContext, IRepository<Users> userContext)
         {
             this.rolesContext = RolesContext;
+            this.userContext = userContext;
         }
 
-        public List<RoleCreateViewModel> GetRolesList()
+        public List<RoleListViewModel> GetRolesList()
         {
-            RoleCreateViewModel model = new RoleCreateViewModel();
-            
-            return model;
+
+            var userList = userContext.Collection().ToList();
+            var roleList = rolesContext.Collection().ToList();
+            var result = (from p in roleList
+                          select new RoleListViewModel()
+                          {
+                              Id = p.Id,
+                              CreatedBy = userContext.Collection().Where(x => x.Id == p.CreatedBy)
+                                                .Select(y => y.UserName).FirstOrDefault(),
+                              CreatedAt = p.CreatedAt,
+                              Name = p.Name,
+                              Code = p.Code,
+                              UpdatedBy = userContext.Collection().Where(x => x.Id == p.UpdatedId)
+                                                .Select(y => y.UserName).FirstOrDefault(),
+                              UpdatedAt = p.UpdatedAt
+
+                          }).ToList();
+
+            return result;
+
         }
 
-        public void CreateRole(Roles role,string Id)
+        public void CreateRole(Roles role,string emailId)
         {
+           
+            var users = userContext.Collection().FirstOrDefault(x => x.Email == emailId);
+
             role.UpdatedAt = DateTime.Now;
-            role.UpdatedId = Id;
+            role.CreatedBy = users.Id;
             
             rolesContext.Insert(role);
             rolesContext.Commit();    
         }
 
+        public void EditRole(Roles role,string Id,string rolesToEdit)
+        {
+            Roles roleEdit = rolesContext.Find(rolesToEdit);
+            var users = userContext.Collection().FirstOrDefault(x => x.Email == Id);
+            
+            roleEdit.Name = role.Name;
+            roleEdit.Code = role.Code;
+            roleEdit.UpdatedId = users.Id;
+            roleEdit.UpdatedAt = DateTime.Now;
 
+            rolesContext.Commit();
+        }
+
+        public void FinalDelete(string Id)
+        {
+            rolesContext.Delete(Id);
+            rolesContext.Commit();
+        }
 
     }
 }
