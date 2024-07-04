@@ -86,6 +86,7 @@ namespace Ticketmanagment.WebUI.Models
         [Required]
         public string Role { get; set; }
 
+      
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 

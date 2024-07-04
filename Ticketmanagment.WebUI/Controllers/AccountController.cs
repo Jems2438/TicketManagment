@@ -156,17 +156,14 @@ namespace Ticketmanagment.WebUI.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-               
                 if (result.Succeeded)
                 {
-
                     Users users = new Users()
                     {
                         UserName = model.UserName,
                         Email = model.Email,
                         Role = model.Role,
-                        Password = model.Password,
-                       
+                        Password = model.Password
                         
                     };
                     userContext.Insert(users);
