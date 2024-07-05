@@ -160,7 +160,7 @@ namespace Ticketmanagment.WebUI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model,string id)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             var roledata = roleContext.Collection().Select(x => x.Code).ToList();
             ViewBag.ListOfRole = roledata;

@@ -266,6 +266,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Ticket\" />
     <Folder Include="Views\UserList\" />
+    <Folder Include="Views\UserRole\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

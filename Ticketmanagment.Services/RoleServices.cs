@@ -7,9 +7,6 @@ using TicketManagment.Core.Contracts;
 using TicketManagment.Core.Models;
 using TicketManagment.Core.ViewModels;
 
-
-
-
 namespace Ticketmanagment.Services
 {
     public class RoleServices : IRoleService
