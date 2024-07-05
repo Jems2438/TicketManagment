@@ -27,20 +27,20 @@ namespace Ticketmanagment.Services
                               CreatedAt = p.CreatedAt,
                               UserName = p.UserName,
                               Password = p.Password,
-                              CreatedBy = userContext.Collection().Where(x => x.Id == p.Id)
+                              CreatedBy = userContext.Collection().Where(x => x.Id == p.CreatedBy)
                                                 .Select(y => y.UserName).FirstOrDefault(),
                               Email = p.Email,
                               UpdatedAt = p.UpdatedAt,
-                              UpdatedId = userContext.Collection().Where(x => x.Id == p.Id)
+                              UpdatedId = userContext.Collection().Where(x => x.Id == p.UpdatedId)
                                                 .Select(y => y.UserName).FirstOrDefault(),
                           });
             return result.ToList();
         }
 
-        public void EditUser(Users users, string Id, string userToEdit)
+        public void EditUser(Users users, string emailId, string userToEdit)
         {
             Users userEdit = userContext.Find(userToEdit);
-            var usersId = userContext.Collection().FirstOrDefault(x => x.Email == Id);
+            var usersId = userContext.Collection().FirstOrDefault(x => x.Email == emailId);
       
             userEdit.Role = users.Role;
             userEdit.IsActive = users.IsActive;

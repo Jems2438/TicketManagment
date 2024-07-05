@@ -108,7 +108,6 @@ namespace Ticketmanagment.WebUI.Controllers
                 roleService.FinalDelete(Id);
                 return RedirectToAction("Index");
             }
-
         }
 
     }

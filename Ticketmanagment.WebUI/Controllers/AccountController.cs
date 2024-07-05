@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -20,6 +21,7 @@ namespace Ticketmanagment.WebUI.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IRepository<Users> userContext;
+        private IRepository<Roles> roleContext;
 
 
         //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -27,9 +29,10 @@ namespace Ticketmanagment.WebUI.Controllers
         //    UserManager = userManager;
         //    SignInManager = signInManager;
         //}
-        public AccountController(IRepository<Users> UserContext)
+        public AccountController(IRepository<Roles> roleContext, IRepository<Users> UserContext)
         {
             this.userContext = UserContext;
+            this.roleContext = roleContext;
         }
         public ApplicationSignInManager SignInManager
         {
@@ -142,7 +145,14 @@ namespace Ticketmanagment.WebUI.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+           
+            var roledata = roleContext.Collection().Select(x => x.Code).ToList();
+            ViewBag.ListOfRole = roledata;
+            RegisterViewModel model = new RegisterViewModel()
+            {
+                ListOfRole = roledata
+            };
+            return View(model);
         }
 
         //
@@ -150,21 +160,26 @@ namespace Ticketmanagment.WebUI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model,string id)
         {
+            var roledata = roleContext.Collection().Select(x => x.Code).ToList();
+            ViewBag.ListOfRole = roledata;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                var LoginUser = User.Identity.Name;
                 if (result.Succeeded)
-                {
+                {               
                     Users users = new Users()
                     {
                         UserName = model.UserName,
                         Email = model.Email,
                         Role = model.Role,
-                        Password = model.Password
-                        
+                        Password = model.Password,
+                        CreatedBy = userContext.Collection().Where(x => x.Email == LoginUser)
+                                           .Select(x => x.Id).FirstOrDefault()
+                                                
                     };
                     userContext.Insert(users);
                     userContext.Commit();

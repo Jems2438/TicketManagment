@@ -10,6 +10,6 @@ namespace TicketManagment.Core.Contracts
     public interface IUserService
     {
         List<Users> GetUserList();
-        void EditUser(Users users, string Id, string userToEdit);
+        void EditUser(Users users, string emailId, string userToEdit);
     }
 }

@@ -40,9 +40,11 @@
         </div>
     </div>
     <div class="form-group" style="margin-left:25%">
-        @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Role, htmlAttributes: new { @class = "col-md-2 control-label" })
         <div class="">
-            @Html.TextBoxFor(m => m.Role, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Role, new SelectList(ViewBag.ListOfRole) , new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+
         </div>
     </div>
     <div class="form-group" style="margin-left:25%">
@@ -57,7 +59,7 @@
 
     <div class="form-group" style="margin-left:45%">
         <div class="">
-            <input type="submit" class="btn btn-primary" value="Register"></input>
+            <input type="submit" class="btn btn-primary" value="Register" />
         </div>
     </div>
 }

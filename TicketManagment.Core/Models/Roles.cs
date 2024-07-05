@@ -10,6 +10,7 @@ namespace TicketManagment.Core.Models
     {
         public string  Name { get; set; }
         public string Code { get; set; }
+       
 
     }
 }

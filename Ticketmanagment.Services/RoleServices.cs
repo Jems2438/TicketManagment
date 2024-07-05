@@ -40,11 +40,8 @@ namespace Ticketmanagment.Services
                               UpdatedBy = userContext.Collection().Where(x => x.Id == p.UpdatedId)
                                                 .Select(y => y.UserName).FirstOrDefault(),
                               UpdatedAt = p.UpdatedAt
-
                           }).ToList();
-
             return result;
-
         }
 
         public void CreateRole(Roles role,string emailId)

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TicketManagment.Core.Models;
 
 namespace Ticketmanagment.WebUI.Models
 {
@@ -83,10 +84,11 @@ namespace Ticketmanagment.WebUI.Models
         [Required]
         public string UserName { get; set; }
 
-        [Required]
-        public string Role { get; set; }
+        
 
-      
+        public string Role { get; set; }
+        public List<string> ListOfRole { get; set; }
+
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
