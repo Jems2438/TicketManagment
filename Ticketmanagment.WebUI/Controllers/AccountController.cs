@@ -12,6 +12,7 @@ using Microsoft.Owin.Security;
 using Ticketmanagment.WebUI.Models;
 using TicketManagment.Core.Contracts;
 using TicketManagment.Core.Models;
+using TicketManagment.Core.ViewModels;
 
 namespace Ticketmanagment.WebUI.Controllers
 {
@@ -22,6 +23,7 @@ namespace Ticketmanagment.WebUI.Controllers
         private ApplicationUserManager _userManager;
         private IRepository<Users> userContext;
         private IRepository<Roles> roleContext;
+         IAccountService accountService;
 
 
         //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -29,10 +31,12 @@ namespace Ticketmanagment.WebUI.Controllers
         //    UserManager = userManager;
         //    SignInManager = signInManager;
         //}
-        public AccountController(IRepository<Roles> roleContext, IRepository<Users> UserContext)
+        public AccountController(IAccountService accountService,IRepository<Roles> roleContext, IRepository<Users> UserContext)
         {
+            this.accountService = accountService;
             this.userContext = UserContext;
             this.roleContext = roleContext;
+            
         }
         public ApplicationSignInManager SignInManager
         {
@@ -170,19 +174,17 @@ namespace Ticketmanagment.WebUI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 var LoginUser = User.Identity.Name;
                 if (result.Succeeded)
-                {               
-                    Users users = new Users()
+                {
+                    UserRegisterViewModel Model = new UserRegisterViewModel()
                     {
                         UserName = model.UserName,
                         Email = model.Email,
                         Role = model.Role,
-                        Password = model.Password,
-                        CreatedBy = userContext.Collection().Where(x => x.Email == LoginUser)
-                                           .Select(x => x.Id).FirstOrDefault()
-                                                
+                        Password = model.Password, 
                     };
-                    userContext.Insert(users);
-                    userContext.Commit();
+
+                    accountService.Registration(Model, LoginUser);
+                   
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

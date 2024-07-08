@@ -11,10 +11,14 @@ namespace Ticketmanagment.Services
     public class UserServices : IUserService
     {
         IRepository<Users> userContext;
+        IRepository<UserRole> userRoleContext;
+        IRepository<Roles> roleContext;
 
-        public UserServices(IRepository<Users> UserContext)
+        public UserServices(IRepository<Roles> roleContext,IRepository<Users> UserContext,IRepository<UserRole> userRoleConetext)
         {
+            this.roleContext = roleContext;
             this.userContext = UserContext;
+            this.userRoleContext = userRoleConetext;
         }
 
         public List<Users> GetUserList()
@@ -33,6 +37,7 @@ namespace Ticketmanagment.Services
                               UpdatedAt = p.UpdatedAt,
                               UpdatedId = userContext.Collection().Where(x => x.Id == p.UpdatedId)
                                                 .Select(y => y.UserName).FirstOrDefault(),
+                              Role = p.Role
                           });
             return result.ToList();
         }
@@ -41,17 +46,30 @@ namespace Ticketmanagment.Services
         {
             Users userEdit = userContext.Find(userToEdit);
             var usersId = userContext.Collection().FirstOrDefault(x => x.Email == emailId);
-      
+            var InitialUserRole = usersId.Role;
+
             userEdit.Role = users.Role;
             userEdit.IsActive = users.IsActive;
             userEdit.UserName = users.UserName;
             userEdit.Email = users.Email;
             userEdit.UpdatedAt = DateTime.Now;
             userEdit.UpdatedId = usersId.Id;
+
            
+            var userRoleEdited = userRoleContext.Collection().Where(x => x.UserId == userEdit.Id)
+                                        .Select(x => x.Id).FirstOrDefault();
+            UserRole editRole = userRoleContext.Find(userRoleEdited);
+            if(InitialUserRole != users.Role)
+            {
+                editRole.RoleId = roleContext.Collection().Where(x => x.Code == users.Role)
+                                        .Select(x => x.Id).FirstOrDefault();
+                editRole.UpdatedAt = DateTime.Now;
+                editRole.UpdatedId = usersId.Id;
+                userRoleContext.Commit();
+            }
+             
             userContext.Commit();
         }
-
 
     }
 }

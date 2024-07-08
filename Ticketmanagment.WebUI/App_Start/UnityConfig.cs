@@ -56,6 +56,7 @@ namespace Ticketmanagment.WebUI
             
             container.RegisterType<IUserService, UserServices>();
             container.RegisterType<IRoleService, RoleServices>();
+            container.RegisterType<IAccountService, AccountService>();
 
 
         }
