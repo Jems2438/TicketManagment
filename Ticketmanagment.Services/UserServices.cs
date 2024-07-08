@@ -54,7 +54,6 @@ namespace Ticketmanagment.Services
             userEdit.Email = users.Email;
             userEdit.UpdatedAt = DateTime.Now;
             userEdit.UpdatedId = usersId.Id;
-
            
             var userRoleEdited = userRoleContext.Collection().Where(x => x.UserId == userEdit.Id)
                                         .Select(x => x.Id).FirstOrDefault();
@@ -66,8 +65,8 @@ namespace Ticketmanagment.Services
                 editRole.UpdatedAt = DateTime.Now;
                 editRole.UpdatedId = usersId.Id;
                 userRoleContext.Commit();
-            }
-             
+            }  
+            
             userContext.Commit();
         }
 
