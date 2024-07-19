@@ -21,6 +21,8 @@ namespace Ticketmanagment.DataAccess.Sql
         public DbSet<Roles> Role { get; set; }
         public DbSet<Timesheet> Timesheets { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<CommonLookup> CommonLokups { get; set; }
+
 
     }
 }

@@ -28,7 +28,7 @@ namespace Ticketmanagment.Services
                           select new Users()
                           {
                               Id = p.Id,
-                              CreatedAt = p.CreatedAt,
+                              CreatedAt = p.CreatedAt.Date,
                               UserName = p.UserName,
                               Password = p.Password,
                               CreatedBy = userContext.Collection().Where(x => x.Id == p.CreatedBy)
@@ -54,19 +54,19 @@ namespace Ticketmanagment.Services
             userEdit.Email = users.Email;
             userEdit.UpdatedAt = DateTime.Now;
             userEdit.UpdatedId = usersId.Id;
-           
+
             var userRoleEdited = userRoleContext.Collection().Where(x => x.UserId == userEdit.Id)
                                         .Select(x => x.Id).FirstOrDefault();
             UserRole editRole = userRoleContext.Find(userRoleEdited);
-            if(InitialUserRole != users.Role)
+            if (InitialUserRole != users.Role)
             {
                 editRole.RoleId = roleContext.Collection().Where(x => x.Code == users.Role)
                                         .Select(x => x.Id).FirstOrDefault();
                 editRole.UpdatedAt = DateTime.Now;
                 editRole.UpdatedId = usersId.Id;
                 userRoleContext.Commit();
-            }  
-            
+            }
+
             userContext.Commit();
         }
 

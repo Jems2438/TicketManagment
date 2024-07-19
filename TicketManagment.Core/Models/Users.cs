@@ -19,6 +19,8 @@ namespace TicketManagment.Core.Models
         [Required]
         
         public string Password { get; set; }
+        public List<string> ListOfRole { get; set; }
+
 
     }
 }

@@ -183,6 +183,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CommonLookupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -214,11 +215,13 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -261,6 +264,12 @@
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Delete.cshtml" />
     <Content Include="Views\UserLists\UserList.cshtml" />
+    <Content Include="Views\CommonLookup\Index.cshtml" />
+    <Content Include="Views\CommonLookup\Create.cshtml" />
+    <Content Include="Views\CommonLookup\Delete.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\CommonLookup\Edit.cshtml" />
+    <Content Include="Views\CommonLookup\_EditCommon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

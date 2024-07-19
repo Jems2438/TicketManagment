@@ -9,13 +9,19 @@
     <div class="list-group">
         @Html.ActionLink("Users", "UserList", "UserLists", null, new { @class = "list-group-item" })
       @Html.ActionLink("Register", "Register", "Account", null, new { @class = "list-group-item" })
-        @Html.ActionLink("Roles", "Index", "Roles", null, new { @class = "list-group-item"})
+    
     </div>
 </div>
 <div class="col-md-6">
+    <h4>Roles Manager</h4>
+    @Html.ActionLink("Roles", "Index", "Roles", null, new { @class = "list-group-item" })
 </div>
 
 <div class="col-md-7">
+    <h4>CommonLookup Manager</h4>
+    @Html.ActionLink("CommonLookup", "Index", "CommonLookup", null, new { @class = "list-group-item" })
+</div>
+<div class="col-md-8">
     <h4>Ticket Manager</h4>    
 </div>
 

@@ -12,11 +12,13 @@ namespace Ticketmanagment.WebUI.Controllers
     {
         IRepository<Users> context;
         IUserService userService;
+        IRepository<Roles> roleContext;
 
-        public UserListsController(IRepository<Users> context, IUserService UserService)
+        public UserListsController(IRepository<Users> context, IUserService UserService, IRepository<Roles> roleContext)
         {
             this.context = context;
             this.userService = UserService;
+            this.roleContext = roleContext;
         }
         // GET: UserList
         public ActionResult UserList()
@@ -35,6 +37,9 @@ namespace Ticketmanagment.WebUI.Controllers
             else
             {
                 Users model = new Users();
+                var roledata = roleContext.Collection().Select(x => x.Code).ToList();
+                ViewBag.ListOfRole = roledata;
+                model.ListOfRole = roledata;
                 model = users; 
                 return View(model);
             }

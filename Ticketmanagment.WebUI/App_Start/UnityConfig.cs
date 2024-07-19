@@ -52,11 +52,14 @@ namespace Ticketmanagment.WebUI
             container.RegisterType<IRepository<Ticket>, SQLRepository<Ticket>>();
             container.RegisterType<IRepository<Roles>, SQLRepository<Roles>>();
             container.RegisterType<IRepository<Comment>, SQLRepository<Comment>>();
+            container.RegisterType<IRepository<CommonLookup>, SQLRepository<CommonLookup>>();
 
             
             container.RegisterType<IUserService, UserServices>();
             container.RegisterType<IRoleService, RoleServices>();
             container.RegisterType<IAccountService, AccountService>();
+            container.RegisterType<ITicketService, TicketService>();
+            container.RegisterType<ICommonLookup, CommonLookupService>();
 
 
         }

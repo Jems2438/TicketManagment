@@ -76,6 +76,10 @@
     <Compile Include="Migrations\202407040926115_newupdatedfield.Designer.cs">
       <DependentUpon>202407040926115_newupdatedfield.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202407081053345_addCommonLookup.cs" />
+    <Compile Include="Migrations\202407081053345_addCommonLookup.Designer.cs">
+      <DependentUpon>202407081053345_addCommonLookup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -112,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202407040926115_newupdatedfield.resx">
       <DependentUpon>202407040926115_newupdatedfield.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407081053345_addCommonLookup.resx">
+      <DependentUpon>202407081053345_addCommonLookup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

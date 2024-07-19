@@ -43,12 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IAccountService.cs" />
+    <Compile Include="Contracts\ICommonLookup.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Contracts\IRoleService.cs" />
     <Compile Include="Contracts\ITicketService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CommonLookup.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\Timesheet.cs" />
