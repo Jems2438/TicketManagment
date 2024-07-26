@@ -46,15 +46,21 @@ namespace Ticketmanagment.Services
            
             var users = userContext.Collection().FirstOrDefault(x => x.Email == emailId);
 
-            role.UpdatedAt = DateTime.Now;
-            role.CreatedBy = users.Id;
-            
-            rolesContext.Insert(role);
+            Roles newRole = new Roles()
+                            {
+                                Name = role.Name,
+                                Code = role.Code,
+                                CreatedBy = users.Id
+                            };
+            //role.UpdatedAt = DateTime.Now;
+            //role.CreatedBy = users.Id;
+            rolesContext.Insert(newRole);
             rolesContext.Commit();    
         }
 
         public void EditRole(Roles role,string Id,string rolesToEdit)
         {
+           
             Roles roleEdit = rolesContext.Find(rolesToEdit);
             var users = userContext.Collection().FirstOrDefault(x => x.Email == Id);
             

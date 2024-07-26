@@ -1,62 +1,131 @@
-﻿@model IEnumerable<TicketManagment.Core.ViewModels.RoleListViewModel>
+﻿@using Kendo.Mvc.UI
+<div class="text-center">
+    <h2>Roles Manager   </h2>
 
-@{
-    ViewBag.Title = "Index";
-}
+    @(Html.Kendo().Grid<TicketManagment.Core.ViewModels.RoleListViewModel>()
+                 .Name("grid")
+                 .ToolBar(tools =>
+                 {
+                     tools.Create().Text("CreateRole");
 
-<h2>Index</h2>
+                 })
+                .Columns(columns =>
+                {
+                    columns.Bound(c => c.CreatedAt).Width(100);
+                    columns.Bound(c => c.CreatedBy).Width(100);
+                    columns.Bound(c => c.Name).Width(120);
+                    columns.Bound(c => c.Code).Width(100);
+                    columns.Bound(c => c.UpdatedBy).Width(100);
+                    columns.Bound(c => c.UpdatedAt).Width(100);
+                    columns.Command(command =>
+                    {
+                        command.Edit();
+                        command.Destroy();
+                    }).Title("Commands").Width(180);
+                })
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+                .Editable(editable => editable.Mode(GridEditMode.PopUp)
+                        .TemplateName("RoleEdit")
+                        .Window(w =>
+                        {
+                            w.Width(400);
+                        }))
+                .Sortable()
+                 .Events(events => events.Edit("onEdit"))
+                // .HtmlAttributes(new { style = "height:400px;" })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Model(model =>
+                    {
+                        model.Id(p => p.Id);
+                        model.Field(p => p.Id).Editable(false);
+                        model.Field(p => p.Name).Editable(true);
+                        model.Field(p => p.Code).Editable(true);
+                        model.Field(p => p.CreatedAt).Editable(false);
+                        model.Field(p => p.CreatedBy).Editable(false);
+                        model.Field(p => p.UpdatedAt).Editable(false);
+                        model.Field(p => p.UpdatedBy).Editable(false);
+
+                    })
+                    .Read(read => read.Action("GetListOfRole", "Roles"))
+                    .Create(update =>  update.Action("CreateRole", "Roles"))
+                    .Update(update => update.Action("Edit", "Roles"))
+                    .Destroy(update => update.Action("ConfirmDelete", "Roles"))
+                    .PageSize(20)
+                )
+                .Resizable(resize => resize.Columns(true))
+        )
+
+<script>
+    function onEdit(e) {
+        var window = e.container.data("kendoWindow");
+
+        // Set title based on the type of operation
+        if (e.model.isNew()) {
+            // This is a Create operation
+            window.setOptions({ title: "Create Role" });
+        } else {
+            // This is an Edit operation
+            window.setOptions({ title: "Edit Details" });
+        }
+    }
+    
+</script>   
+</div>
+
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Code)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </th>
-        <th></th>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
     </tr>
+    }
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.CreatedAt)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CreatedBy)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Code)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.UpdatedBy)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.UpdatedAt)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-    </td>
-</tr>
-}
-
-</table>
+    </table>*@

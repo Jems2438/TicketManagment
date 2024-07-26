@@ -79,10 +79,11 @@
             </td>
             <td>
 
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" >
-                    Edit
+                <button type="button" id="item.Id" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Edit 
                 </button>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @data_toggle = "modal", @data_target = "#myModal" }) |*@
+
+                @*@Html.ActionLink("Edit", "Edit",  new { id =item.Id ,@data_toggle = "modal", @data_target = "#myModal" }) |*@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
 
             </td>
@@ -91,8 +92,15 @@
 
 </table>
 
-@using (Html.BeginForm())
+@using (Ajax.BeginForm("Edit", "CommonLookup", FormMethod.Get,
+                    new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "Get",
+                        
+                    }))
 {
+    @Html.ValidationSummary()
     @Html.AntiForgeryToken()
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -105,7 +113,7 @@
                     <h4 class="modal-title" id="myModalLabel">Edit CommonLookup</h4>
                 </div>
                 <div class="modal-body" id="frmEmp">
-               
+          
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-primary" value="Submit" />
@@ -116,5 +124,18 @@
 
 }
 
+@*<script>
+    $(document).ready(function {
+        $.ajax({
+            url: <%: Url.Action("Edit", "CommonLookup" %>,
+                success: function (data) {
+                    $('#frmEmp').html(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    jAlert('Some error message', 'Error');
+                }
+    });
+    });
+</script>*@
 
 

@@ -25,7 +25,7 @@
                 <h4 class="modal-title" id="myModalLabel">Edit CommonLookup</h4>
             </div>
             <div class="modal-body" id="frmEmp">
-                @Html.Partial("_EditCommon")
+               @Html.RenderPartial("_EditCommon",Model)
             </div>
                 <div class="modal-footer">                  
                       <input type="submit" class="btn btn-primary" value="Submit" />                    

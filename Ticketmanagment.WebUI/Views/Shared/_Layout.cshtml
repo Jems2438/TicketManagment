@@ -7,6 +7,25 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    @* Add the Kendo SASS Bootstrap theme: *@
+    <link href="https://kendo.cdn.telerik.com/themes/8.0.1/bootstrap/bootstrap-main.css" rel="stylesheet" type="text/css" />
+
+    @* Add the jQuery script from the jQuery CDN: *@
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    @* Add the Kendo UI scripts: *@
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.2.514/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.2.514/js/kendo.aspnetmvc.min.js"></script>
+
+    <!-- Include Kendo UI CSS -->
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.default.min.css">
+
+    @* Add the bootstrap.min.js script: *@
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+
+
 </head>
 
 
@@ -52,8 +71,8 @@
 
     </div>
 
-    @*@Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)*@
+    @RenderSection("scripts", required: false)
 </body>
 </html>
