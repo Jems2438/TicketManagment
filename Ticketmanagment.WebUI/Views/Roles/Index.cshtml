@@ -8,15 +8,16 @@
                  {
                      tools.Create().Text("CreateRole");
 
+
                  })
                 .Columns(columns =>
                 {
-                    columns.Bound(c => c.CreatedAt).Width(100);
                     columns.Bound(c => c.CreatedBy).Width(100);
+                    columns.Bound(c => c.CreatedAt).Width(100).ClientTemplate("#=kendo.toString(kendo.parseDate(CreatedAt), 'dd/MM/yyyy')#");
                     columns.Bound(c => c.Name).Width(120);
                     columns.Bound(c => c.Code).Width(100);
                     columns.Bound(c => c.UpdatedBy).Width(100);
-                    columns.Bound(c => c.UpdatedAt).Width(100);
+                    columns.Bound(c => c.UpdatedAt).Width(100).ClientTemplate("#=kendo.toString(kendo.parseDate(UpdatedAt), 'dd/MM/yyyy')#");
                     columns.Command(command =>
                     {
                         command.Edit();
@@ -30,11 +31,22 @@
                         {
                             w.Width(400);
                         }))
-                .Sortable()
-                 .Events(events => events.Edit("onEdit"))
-                // .HtmlAttributes(new { style = "height:400px;" })
+                 .Sortable()
+                 .Events(events => { events.Edit("onEdit");
+                     events.Save("onSave");
+
+                 })
+
+                .HtmlAttributes(new { style =
+                                                "background-color:#dbdbdb;"
+                })
+                 .Reorderable(r => r.Columns(true))
+                 .Groupable(g => g.ShowFooter(false))
+                 .Scrollable()
                 .DataSource(dataSource => dataSource
                     .Ajax()
+                    .AutoSync(true)
+
                     .Model(model =>
                     {
                         model.Id(p => p.Id);
@@ -54,25 +66,157 @@
                     .PageSize(20)
                 )
                 .Resizable(resize => resize.Columns(true))
+
         )
 
-<script>
-    function onEdit(e) {
-        var window = e.container.data("kendoWindow");
+    <script>
+        function onEdit(e) {
+            var window = e.container.data("kendoWindow");
 
-        // Set title based on the type of operation
-        if (e.model.isNew()) {
-            // This is a Create operation
-            window.setOptions({ title: "Create Role" });
-        } else {
-            // This is an Edit operation
-            window.setOptions({ title: "Edit Details" });
+            if (e.model.isNew()) {
+                
+                window.setOptions({ title: "Create Role" });
+                
+            } else {
+                // This is an Edit operation
+                window.setOptions({ title: "Edit Details" });
+            }
         }
-    }
-    
-</script>   
+
+        function onSave(e) {
+            
+            location.reload();
+        }
+
+
+    </script>
 </div>
 
+<style>
+    
+    .k-grid {
+        border: none;
+    }
+
+    .k-grid-pager {
+        border: 1px solid #d5d5d5;
+    }
+
+    .k-grid .k-grid-header .k-header {
+        border-bottom: none;
+        background-color: #3958AC;
+    }
+
+        .k-grid .k-grid-header .k-header a {
+            color: white;
+        }
+
+    .k-pager {
+        background-color: gray;
+        color: gray;
+    }
+
+        .k-pager .k-link.k-selected {
+            background-color: lime;
+        }
+    .k-bg-inherit .k-bg-transparent {
+        background-color: darkgray;
+    }
+    .k-button-solid-primary {
+        border-color: gray !important;
+        color: white;
+        background-color: darkslateblue;
+    }
+        .k-button-solid-primary:hover, .k-button-solid-primary.k-hover {
+            border-color: blue;
+            background-color: blue;
+        }
+</style>
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+    }
+
+    </table>*@
+</div>
+
+<style>
+
+    .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        padding: 0px;
+        border-left: none;
+    }
+
+        .tg td {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 5px 5px 5px 0px;
+            overflow: hidden;
+            vertical-align: top;
+        }
+
+        .tg th {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 5px 0px 5px 5px;
+            overflow: hidden;
+            vertical-align: top;
+        }
+</style>
 @*<h2>Index</h2>
 
     <p>

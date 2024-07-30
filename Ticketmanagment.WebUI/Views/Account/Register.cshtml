@@ -42,7 +42,7 @@
     <div class="form-group" style="margin-left:25%">
         @Html.LabelFor(m => m.Role, htmlAttributes: new { @class = "col-md-2 control-label" })
         <div class="">
-            @Html.DropDownListFor(m => m.Role, new SelectList(ViewBag.ListOfRole) ,"Select Role", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.Role, new SelectList(ViewBag.ListOfRole), "Select Role", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
 
         </div>
@@ -67,3 +67,12 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+@*@(Html.Kendo().DropDownList()
+                  .Name("movies")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .HtmlAttributes(new { style = "width: 100%" })
+                  .BindTo(new SelectList(ViewBag.ListOfRole));
+    }
+)*@
+        

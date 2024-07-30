@@ -51,6 +51,7 @@ namespace Ticketmanagment.Services
                                 Name = role.Name,
                                 Code = role.Code,
                                 CreatedBy = users.Id
+                                
                             };
             //role.UpdatedAt = DateTime.Now;
             //role.CreatedBy = users.Id;
