@@ -32,7 +32,7 @@ namespace Ticketmanagment.WebUI.Controllers
         public JsonResult GetListOfRole([DataSourceRequest] DataSourceRequest request)
         {
             var result = roleService.GetRolesList();
-            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return Json(result.ToDataSourceResult(request));
         }
 
         //public ActionResult CreateRole()

@@ -181,6 +181,7 @@ namespace Ticketmanagment.WebUI.Controllers
                         Email = model.Email,
                         Role = model.Role,
                         Password = model.Password, 
+                        CreatedAt = DateTime.Now
                     };
 
                     accountService.Registration(Model, LoginUser);

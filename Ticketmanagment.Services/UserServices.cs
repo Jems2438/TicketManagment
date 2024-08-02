@@ -28,7 +28,7 @@ namespace Ticketmanagment.Services
                           select new Users()
                           {
                               Id = p.Id,
-                              CreatedAt = p.CreatedAt.Date,
+                              CreatedAt = p.CreatedAt,
                               UserName = p.UserName,
                               Password = p.Password,
                               CreatedBy = userContext.Collection().Where(x => x.Id == p.CreatedBy)

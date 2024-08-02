@@ -1,15 +1,5 @@
 ﻿
 
-@using Kendo.Mvc.UI
-
-@(Html.Kendo().DataSource<TicketManagment.Core.Models.Roles>()
-    .Name("dataSource1")
-    .Ajax(dataSource => dataSource
-            .Model(model => model.Id(Roles => Roles.Id))
-            .Create(create => create.Action("CreateRole", "Roles"))
-            .Read(read => read.Action("GetListOfRole", "Roles"))
-    )
-   )
 
 
 

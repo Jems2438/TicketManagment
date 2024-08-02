@@ -80,6 +80,14 @@
     <Compile Include="Migrations\202407081053345_addCommonLookup.Designer.cs">
       <DependentUpon>202407081053345_addCommonLookup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202408010858058_newDatetimechange.cs" />
+    <Compile Include="Migrations\202408010858058_newDatetimechange.Designer.cs">
+      <DependentUpon>202408010858058_newDatetimechange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408011048067_newdateinsert.cs" />
+    <Compile Include="Migrations\202408011048067_newdateinsert.Designer.cs">
+      <DependentUpon>202408011048067_newdateinsert.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -119,6 +127,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202407081053345_addCommonLookup.resx">
       <DependentUpon>202407081053345_addCommonLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408010858058_newDatetimechange.resx">
+      <DependentUpon>202408010858058_newDatetimechange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408011048067_newdateinsert.resx">
+      <DependentUpon>202408011048067_newdateinsert.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

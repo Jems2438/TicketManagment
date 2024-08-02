@@ -47,13 +47,16 @@ namespace Ticketmanagment.Services
             var users = userContext.Collection().FirstOrDefault(x => x.Email == emailId);
 
             Roles newRole = new Roles()
-                            {
-                                Name = role.Name,
-                                Code = role.Code,
-                                CreatedBy = users.Id
-                                
-                            };
+            {
+                Name = role.Name,
+                Code = role.Code,
+                CreatedBy = users.Id
+         
+            };
             //role.UpdatedAt = DateTime.Now;
+
+            //role.Name = role.Name;
+            //role.Code = role.Code;
             //role.CreatedBy = users.Id;
             rolesContext.Insert(newRole);
             rolesContext.Commit();    

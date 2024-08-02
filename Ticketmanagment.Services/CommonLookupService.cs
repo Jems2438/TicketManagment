@@ -25,7 +25,7 @@ namespace Ticketmanagment.Services
                          select new CommonLookup()
                          {
                                 Id = p.Id, 
-                                CreatedAt = p.CreatedAt.Date,
+                                CreatedAt = p.CreatedAt,
                                 CreatedBy = userContext.Collection().Where(x => x.Id == p.CreatedBy )
                                                     .Select(x => x.UserName).FirstOrDefault(),
                                 UpdatedAt = p.UpdatedAt,
